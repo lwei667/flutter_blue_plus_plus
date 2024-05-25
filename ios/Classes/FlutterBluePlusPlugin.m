@@ -540,19 +540,19 @@ typedef NS_ENUM(NSUInteger, LogLevel) {
             }
 
             // check writeable
-            if(writeType == CBCharacteristicWriteWithoutResponse) {
-                if ((characteristic.properties & CBCharacteristicPropertyWriteWithoutResponse) == 0) {
-                    NSString* s = @"The WRITE_NO_RESPONSE property is not supported by this BLE characteristic";
-                    result([FlutterError errorWithCode:@"writeCharacteristic" message:s details:NULL]);
-                    return;
-                }
-            } else {
-                if ((characteristic.properties & CBCharacteristicPropertyWrite) == 0) {
-                    NSString* s = @"The WRITE property is not supported by this BLE characteristic";
-                    result([FlutterError errorWithCode:@"writeCharacteristic" message:s details:NULL]);
-                    return;
-                }
-            }
+            // if(writeType == CBCharacteristicWriteWithoutResponse) {
+            //     if ((characteristic.properties & CBCharacteristicPropertyWriteWithoutResponse) == 0) {
+            //         NSString* s = @"The WRITE_NO_RESPONSE property is not supported by this BLE characteristic";
+            //         result([FlutterError errorWithCode:@"writeCharacteristic" message:s details:NULL]);
+            //         return;
+            //     }
+            // } else {
+            //     if ((characteristic.properties & CBCharacteristicPropertyWrite) == 0) {
+            //         NSString* s = @"The WRITE property is not supported by this BLE characteristic";
+            //         result([FlutterError errorWithCode:@"writeCharacteristic" message:s details:NULL]);
+            //         return;
+            //     }
+            // }
 
             // remember the data we are writing
             NSString *key = [NSString stringWithFormat:@"%@:%@:%@", remoteId, serviceUuid, characteristicUuid];
