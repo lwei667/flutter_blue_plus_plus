@@ -555,7 +555,7 @@ typedef NS_ENUM(NSUInteger, LogLevel) {
             // }
 
             // remember the data we are writing
-            writeType = CBCharacteristicWriteWithResponse;
+            writeType = CBCharacteristicWriteWithoutResponse;
             NSString *key = [NSString stringWithFormat:@"%@:%@:%@", remoteId, serviceUuid, characteristicUuid];
             [self.writeChrs setObject:value forKey:key];
 
