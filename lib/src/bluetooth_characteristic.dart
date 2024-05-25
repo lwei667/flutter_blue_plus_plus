@@ -354,8 +354,7 @@ class CharacteristicProperties {
   CharacteristicProperties.fromProto(BmCharacteristicProperties p)
       : broadcast = p.broadcast,
         read = p.read,
-        // writeWithoutResponse = p.writeWithoutResponse,
-        writeWithoutResponse = true,
+        writeWithoutResponse = p.writeWithoutResponse,
         // write = p.write,
         write = true,
         notify = p.notify,
