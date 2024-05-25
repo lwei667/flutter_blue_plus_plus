@@ -1067,13 +1067,6 @@ public class FlutterBluePlusPlugin implements
                     String key = remoteId + ":" + serviceUuid + ":" + characteristicUuid + ":" + descriptorUuid;
                     mWriteDesc.put(key, value);
                     
-                    // characteristic.setValue(hexToBytes(value));
-                    // boolean writeResult = gatt.writeCharacteristic(characteristic);
-                    // if (!writeResult) {
-                    //     result.error("writeCharacteristic", s, null);
-                    // }
-                
-                    write descriptor
                     if (Build.VERSION.SDK_INT >= 33) { // Android 13 (August 2022)
 
                         int rv = gatt.writeDescriptor(descriptor, hexToBytes(value));
