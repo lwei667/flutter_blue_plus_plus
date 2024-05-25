@@ -923,6 +923,7 @@ public class FlutterBluePlusPlugin implements
                     mWriteChr.put(key, value);
 
                     // write characteristic
+                    // set value
                     if(!characteristic.setValue(hexToBytes(value))) {
                         result.error("writeCharacteristic", "characteristic.setValue() returned false", null);
                         break;
