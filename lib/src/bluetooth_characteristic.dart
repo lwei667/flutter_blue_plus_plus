@@ -150,7 +150,7 @@ class BluetoothCharacteristic {
   }
 
   /// Writes a characteristic.
-  ///  - [withoutResponse]: 
+  ///  - [withoutResponse]:
   ///       If `true`, the write is not guaranteed and always returns immediately with success.
   ///       If `false`, the write returns error on failure.
   ///  - [allowLongWrite]: if set, larger writes > MTU are allowed (up to 512 bytes).
@@ -354,8 +354,10 @@ class CharacteristicProperties {
   CharacteristicProperties.fromProto(BmCharacteristicProperties p)
       : broadcast = p.broadcast,
         read = p.read,
-        writeWithoutResponse = p.writeWithoutResponse,
-        write = p.write,
+        // writeWithoutResponse = p.writeWithoutResponse,
+        writeWithoutResponse = true,
+        // write = p.write,
+        write = true,
         notify = p.notify,
         indicate = p.indicate,
         authenticatedSignedWrites = p.authenticatedSignedWrites,
