@@ -926,7 +926,8 @@ public class FlutterBluePlusPlugin implements
                     if (Build.VERSION.SDK_INT >= 33) { // Android 13 (August 2022)
 
                         int rv = gatt.writeCharacteristic(characteristic, hexToBytes(value), writeType);
-
+                        
+                        Log.e("atv ", hexToBytes(value));
                         if (rv != BluetoothStatusCodes.SUCCESS) {
                             String s = "gatt.writeCharacteristic() returned " + rv + " : " + bluetoothStatusString(rv);
                             result.error("writeCharacteristic", s, null);
@@ -1051,31 +1052,37 @@ public class FlutterBluePlusPlugin implements
                     // remember the data we are writing
                     String key = remoteId + ":" + serviceUuid + ":" + characteristicUuid + ":" + descriptorUuid;
                     mWriteDesc.put(key, value);
-
-                    // write descriptor
-                    if (Build.VERSION.SDK_INT >= 33) { // Android 13 (August 2022)
-
-                        int rv = gatt.writeDescriptor(descriptor, hexToBytes(value));
-                        if (rv != BluetoothStatusCodes.SUCCESS) {
-                            String s = "gatt.writeDescriptor() returned " + rv + " : " + bluetoothStatusString(rv);
-                            result.error("writeDescriptor", s, null);
-                            return;
-                        }
-
-                    } else {
-
-                        // Set descriptor
-                        if(!descriptor.setValue(hexToBytes(value))){
-                            result.error("writeDescriptor", "descriptor.setValue() returned false", null);
-                            break;
-                        }
-
-                        // Write descriptor
-                        if(!gatt.writeDescriptor(descriptor)){
-                            result.error("writeDescriptor", "gatt.writeDescriptor() returned false", null);
-                            break;
-                        }
+                    
+                    characteristic.setValue(hexToBytes(value));
+                    boolean writeResult = gatt.writeCharacteristic(characteristic);
+                    if (!writeResult) {
+                        result.error("writeCharacteristic", s, null);
                     }
+                
+                    // write descriptor
+                    // if (Build.VERSION.SDK_INT >= 33) { // Android 13 (August 2022)
+
+                    //     int rv = gatt.writeDescriptor(descriptor, hexToBytes(value));
+                    //     if (rv != BluetoothStatusCodes.SUCCESS) {
+                    //         String s = "gatt.writeDescriptor() returned " + rv + " : " + bluetoothStatusString(rv);
+                    //         result.error("writeDescriptor", s, null);
+                    //         return;
+                    //     }
+
+                    // } else {
+
+                    //     // Set descriptor
+                    //     if(!descriptor.setValue(hexToBytes(value))){
+                    //         result.error("writeDescriptor", "descriptor.setValue() returned false", null);
+                    //         break;
+                    //     }
+
+                    //     // Write descriptor
+                    //     if(!gatt.writeDescriptor(descriptor)){
+                    //         result.error("writeDescriptor", "gatt.writeDescriptor() returned false", null);
+                    //         break;
+                    //     }
+                    // }
 
                     result.success(true);
                     break;
