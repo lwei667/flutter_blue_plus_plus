@@ -381,9 +381,10 @@ class BmCharacteristicProperties {
     return BmCharacteristicProperties(
       broadcast: json['broadcast'] != 0,
       read: json['read'] != 0,
-      writeWithoutResponse: json['write_without_response'] != 0,
-      // write: json['write'] != 0,
-      write: true,
+      // writeWithoutResponse: json['write_without_response'] != 0,
+      writeWithoutResponse: true,
+      write: json['write'] != 0,
+      // write: true,
       notify: json['notify'] != 0,
       indicate: json['indicate'] != 0,
       authenticatedSignedWrites: json['authenticated_signed_writes'] != 0,

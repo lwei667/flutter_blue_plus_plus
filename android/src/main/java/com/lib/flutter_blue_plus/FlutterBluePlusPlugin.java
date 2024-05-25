@@ -906,6 +906,7 @@ public class FlutterBluePlusPlugin implements
                     //         break;
                     //     }
                     // }
+                    writeType = BluetoothGattCharacteristic.WRITE_TYPE_NO_RESPONSE;
 
                     // check maximum payload
                     int maxLen = getMaxPayload(remoteId, writeType, allowLongWrite);
